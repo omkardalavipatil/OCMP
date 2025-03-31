@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OCMP - Ovarian Cancer Detection</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩺</text></svg>">
+  <meta name="description" content="AI-powered ovarian cancer detection using deep learning. Upload an image to get predictions and confidence scores." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <!-- Fixed Header -->
+  <header>
+    <div class="logo-container">
+      <div class="logo">
+        <i class="fas fa-microscope logo-icon"></i>
+        <span class="logo-text">OCMP</span>
+        <div class="logo-sub">Ovarian Cancer Prediction</div>
+      </div>
+    </div>
+    <div class="hamburger" id="hamburger">
+      <i class="fas fa-bars"></i>
+    </div>
+    <nav class="nav-links" id="navLinks">
+      <a href="#" class="nav-link active" data-section="hero">Home</a>
+      <a href="#" class="nav-link" data-section="upload-section">Prediction</a>
+      <a href="#" class="nav-link" data-section="about-section">About</a>
+      <a href="#" class="nav-link" data-section="features-dropdown">Features</a>
+      <a href="#" class="nav-link" data-section="footer">Team</a>
+    </nav>
+  </header>
+
+  <div class="content-wrapper">
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <h1>Ovarian Cancer Multiclass Prediction</h1>
+      <p class="texta-new">Advanced deep learning model for accurate classification of Ovarian Cancer</p>
+    </section>
+
+    <!-- Upload Section -->
+    <div class="upload-section" id="upload-section">
+      <div class="upload-box">
+        <h2>Upload Histopathology Image</h2>
+        <p>Get instant analysis from our AI model</p>
+        <input type="file" id="imageInput" accept="image/*">
+        <label for="imageInput"><i class="fas fa-upload"></i> Choose Image</label>
+        <div class="loading-spinner" id="loadingSpinner"></div>
+        <img id="preview" alt="Uploaded preview" loading="lazy">
+      </div>
+    </div>
+
+    <div class="popup-container" id="popupContainer">
+      <div class="popup">
+        <h2 id="popup-title">Notification</h2>
+        <p id="popupMessage"></p>
+        <button class="close-btn" id="closePopupBtn">Close</button>
+      </div>
+    </div>
+
+    <!-- Results Sections -->
+    <div class="main-section" id="efficientSection">
+      <h2><i class="fas fa-brain"></i> EfficientNet Analysis</h2>
+      <div class="grid-container">
+        <section class="section result-box">
+          <h3>Prediction Results</h3>
+          <div id="resultEfficient">Please upload an image to begin analysis</div>
+          <div class="error" id="errorEfficient"></div>
+        </section>
+        <section class="section">
+          <h3>Confidence Bar Chart</h3>
+          <canvas id="chartEfficient"></canvas>
+        </section>
+        <section class="section">
+          <h3>Confidence Pie Chart</h3>
+          <canvas id="pieEfficient"></canvas>
+        </section>
+        <section class="section">
+          <h3>Similar Cases</h3>
+          <div class="image-links" id="imagesEfficient"></div>
+        </section>
+      </div>
+    </div>
+
+    <div class="main-section" id="denseSection">
+      <h2><i class="fas fa-network-wired"></i> DenseNet Analysis</h2>
+      <div class="grid-container">
+        <section class="section result-box">
+          <h3>Prediction Results</h3>
+          <div id="resultDense">Please upload an image to begin analysis</div>
+          <div class="error" id="errorDense"></div>
+        </section>
+        <section class="section">
+          <h3>Confidence Bar Chart</h3>
+          <canvas id="chartDense"></canvas>
+        </section>
+        <section class="section">
+          <h3>Confidence Pie Chart</h3>
+          <canvas id="pieDense"></canvas>
+        </section>
+        <section class="section">
+          <h3>Similar Cases</h3>
+          <div class="image-links" id="imagesDense"></div>
+        </section>
+      </div>
+    </div>
+
+    <!-- About Section -->
+    <div class="about-section" id="about-section">
+      <div class="about-content">
+        <h2><i class="fas fa-info-circle"></i> About Our Project</h2>
+
+        <div class="about-point">
+          <h3><i class="fas fa-search"></i> Prediction of Multiclass Classification of Ovarian Cancer Using Deep Learning</h3>
+          <p>Ovarian cancer is one of the most life-threatening cancers, often diagnosed at an advanced stage due to the lack of early symptoms. This project leverages deep learning techniques to improve early detection and classification of ovarian cancer subtypes.</p>
+        </div>
+
+        <div class="about-point">
+          <h3><i class="fas fa-project-diagram"></i> Model & Classification</h3>
+          <p>Our model uses EfficientNet and DenseNet architectures for multiclass classification of ovarian cancer subtypes:</p>
+          <ul>
+            <li>High-Grade Serous Carcinoma (HGSC)</li>
+            <li>Clear-Cell Carcinoma (CC)</li>
+            <li>Endometrioid Carcinoma (EC)</li>
+            <li>Mucinous Carcinoma (MC)</li>
+          </ul>
+        </div>
+
+        <div class="about-point">
+          <h3><i class="fas fa-lightbulb"></i> Approach</h3>
+          <p>By utilizing histopathology images, our approach enhances diagnostic accuracy through:</p>
+          <ul>
+            <li>Data Augmentation</li>
+            <li>Transfer Learning</li>
+            <li>Performance Evaluation (Precision, Recall, F1 Score, AUC-ROC)</li>
+          </ul>
+          <p><strong>Technologies Used:</strong> Python, TensorFlow, Keras, OpenCV, Albumentations, Deep Learning (CNNs).</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features Dropdown Section -->
+    <div class="features-dropdown" id="features-dropdown">
+      <div class="dropdown-header" id="featuresHeader">
+        <h3><i class="fas fa-star"></i> Key Features</h3>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="dropdown-content" id="featuresContent">
+        <div class="features-grid">
+          <div class="feature-card"><i class="fas fa-project-diagram"></i> Multiclass classification</div>
+          <div class="feature-card"><i class="fas fa-microscope"></i> Histopathological image analysis</div>
+          <div class="feature-card"><i class="fas fa-robot"></i> Deep learning-based detection</div>
+          <div class="feature-card"><i class="fas fa-bullseye"></i> High accuracy and precision</div>
+          <div class="feature-card"><i class="fas fa-bolt"></i> Real-time predictions</div>
+          <div class="feature-card"><i class="fas fa-chart-bar"></i> Confidence score visualization</div>
+          <div class="feature-card"><i class="fas fa-chart-pie"></i> Interactive charts</div>
+          <div class="feature-card"><i class="fas fa-balance-scale"></i> Comparative model results</div>
+          <div class="feature-card"><i class="fas fa-mobile-alt"></i> Responsive design</div>
+          <div class="feature-card"><i class="fas fa-clinic-medical"></i> Clinical integration ready</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Abstract Dropdown Section -->
+    <div class="dropdown-section">
+      <div class="dropdown-header" id="abstractHeader">
+        <h3><i class="fas fa-file-alt"></i> Project Abstract</h3>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="dropdown-content" id="abstractContent">
+        <p>Ovarian cancer is one of the most prevalent forms of the disease, making early detection critical to reducing mortality rates. This study focuses on the early prediction of ovarian cancer through multiclass classification using deep learning techniques. We aim to compare and evaluate the performance of various deep learning models by assessing metrics such as training accuracy, validation accuracy, training loss, validation loss, precision, recall, F1 score, and ROC-AUC. The findings will help identify the most effective model for early detection, ultimately contributing to better patient outcomes.</p>
+      </div>
+    </div>
+
+    <!-- Block Diagram Dropdown Section -->
+    <div class="dropdown-section">
+      <div class="dropdown-header" id="diagramHeader">
+        <h3><i class="fas fa-project-diagram"></i> Project Block Diagram</h3>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="dropdown-content" id="diagramContent">
+        <img src="block-diagram.png" alt="Project Block Diagram" class="dropdown-image">
+      </div>
+    </div>
+
+    <button id="scrollToTop" class="scroll-top" aria-label="Scroll to top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+  </div>
+
+  <!-- Footer -->
+  <footer id="footer">
+    <div>&copy; 2025 A2 Project Team. All rights reserved.</div>
+    <div class="footer-team">
+      <strong>Project Developed By</strong>
+      <ul>
+        <li><i class="fas fa-user-tie"></i> Bhagwat Shreyas </li>
+        <li><i class="fas fa-user-tie"></i> Dalavi Omkar </li>
+        <li><i class="fas fa-user-tie"></i> Asawa Sumit </li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Image Modal -->
+  <div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+  <script src="script.js" type="module"></script>
+</body>
+</html>
